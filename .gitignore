@@ -2,3 +2,5 @@
 *.swp
 .project
 node_modules
+/nbproject/private/
+/nbproject/

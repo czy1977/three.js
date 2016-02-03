@@ -495,6 +495,7 @@
 
 				viewer.contentWindow.innerWidth -= 10;
 				viewer.contentWindow.innerHeight -= 2;
+                                
 
 			} );
 
@@ -567,8 +568,9 @@
 
 			button.style.display = '';
 
-			selected = file;
-
+			selected = file;                 
+        
+                       //injectEditorButton();
 		};
 
 		if ( window.location.hash !== '' ) {
@@ -576,7 +578,18 @@
 			load( window.location.hash.substring( 1 ) );
 
 		}
-
+                viewer.addEventListener( 'load', injectEditorButton);
+                function injectEditorButton()
+                {
+                        var _script = viewer.contentDocument.createElement('SCRIPT');
+                        _script.src = "../editor/injector/injector.js";
+                        _script.onload = function(){
+                            viewer.contentWindow.eval("injectEditButton()");
+                        };
+                        viewer.contentDocument.body.appendChild(_script);
+                        
+                        //
+                }
 		</script>
 
 	</body>
